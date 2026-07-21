@@ -1,6 +1,6 @@
 # Midjourney Product Mockup Prompts
 
-A categorized collection of Midjourney prompts for generating blank product mockups — drinkware, apparel, packaging, beauty, tech, wall art, books, home decor, accessories, and footwear. Each prompt includes an explanation of the mechanics behind it (lighting, composition, material rendering) rather than generic marketing claims, plus variants you can swap in.
+A categorized collection of Midjourney prompts for product mockups — drinkware, apparel, packaging, beauty, tech, wall art, books, home decor, accessories, and footwear. Each prompt includes an explanation of the mechanics behind it (lighting, composition, material rendering) rather than generic marketing claims, plus variants you can swap in.
 
 Compatible with Midjourney V7 and V6. Syntax like `--ar` and `--no` has stayed stable across recent versions, but keyword weighting may shift slightly in future releases — re-test before relying on exact output.
 
@@ -12,7 +12,7 @@ You'll need an active Midjourney subscription and access to the bot through Disc
 
 Every prompt follows the same structural order: **product → material/finish → environment → lighting → camera angle → aspect ratio → negative prompt.** Keeping that order consistent makes it easy to swap individual pieces without breaking the rest of the sentence. Copy a prompt, paste it into Midjourney, generate four variations, and pick the strongest one. Then swap the bracketed material, color, or environment terms to match your actual product.
 
----
+**Want the full library instead of building prompts one at a time?** [Create professional product mockups in seconds with 300+ ready-to-use Midjourney prompts](https://sevensky.gumroad.com/l/midjourney-mockup-prompts) — skip the expensive photoshoots, stock mockup packs, and fiddly design software, and go straight from prompt to a mockup you can actually use.
 
 ## Drinkware
 
@@ -25,8 +25,6 @@ white ceramic mug, wooden table, morning sunlight, soft shadows, minimalist kitc
 Low-angle directional light produces a shadow gradient along the mug's curvature, which is what reads as roundness rather than a flat printed circle. Eye-level framing keeps proportions undistorted, which matters for listing photos where buyers judge handle size and cup capacity. The wood grain gives texture contrast against the glazed ceramic without competing for attention, and 4:5 matches most Etsy thumbnail crops. `--no text` suppresses Midjourney's tendency to add illegible label-like marks on blank surfaces.
 
 **Variants:** swap `white ceramic` for matte black stoneware or speckled clay · add `steam rising from coffee` for a motion cue · swap the table for a marble countertop or linen tablecloth.
-
----
 
 ## Apparel
 
@@ -50,8 +48,6 @@ A top-down flat lay eliminates perspective distortion, so seam lines and print p
 
 **Variants:** fold the sleeves inward · swap concrete for light oak flooring or a white studio backdrop · change the shirt color directly in the prompt.
 
----
-
 ## Home Decor
 
 ### Glass Candle
@@ -74,8 +70,6 @@ Diffused light preserves linen's woven texture without harsh highlights that cou
 
 **Variants:** change the pillow color · swap the sofa for velvet or leather · try a Scandinavian or mid-century room style.
 
----
-
 ## Books
 
 ### Hardcover Book
@@ -87,8 +81,6 @@ blank hardcover book, standing on dark wood desk, warm desk lamp light, cozy lib
 A single warm light source at a low angle creates a visible spine shadow that separates the book from the background without needing a distinct backdrop color. The library and desk context signal a reading environment, which is useful when the mockup will later have a cover design composited onto the blank spine and front.
 
 **Variants:** change the cover color · add a bookmark ribbon · add reading glasses or a stack of books nearby.
-
----
 
 ## Tech
 
@@ -112,8 +104,6 @@ Soft overhead light minimizes specular highlights on neoprene's matte surface, k
 
 **Variants:** change the sleeve color · add a notebook, pen, or coffee cup to the desk · switch to cool white light for a more clinical tech feel.
 
----
-
 ## Beauty
 
 ### Serum Bottle
@@ -126,8 +116,6 @@ Water droplets increase specular highlights on the surrounding stone, which by c
 
 **Variants:** change the liquid color · swap in a dropper or pump cap · try frosted glass or white ceramic tile as the surface.
 
----
-
 ## Wall Art
 
 ### Art Poster
@@ -139,8 +127,6 @@ blank art poster, pinned to textured white wall, natural window light, subtle sh
 Window light produces a soft, angled shadow from the pin, giving the poster physical presence against the wall instead of looking like a flat overlay. Subtle wall texture keeps the poster's edges from blending into a pure white void.
 
 **Variants:** swap the pin for a wooden clip or a thin black frame · try exposed brick or board-and-batten walls · adjust the light angle to imply a different time of day.
-
----
 
 ## Packaging
 
@@ -164,8 +150,6 @@ Low-key lighting with a single accent light produces defined reflections along t
 
 **Variants:** try green, clear, or amber glass · add a visible cork or foil capsule · swap the wood rack for a metal one.
 
----
-
 ## Accessories
 
 ### Sunglasses
@@ -188,8 +172,6 @@ A single, narrow spotlight creates a strong falloff into shadow at the frame edg
 
 **Variants:** change the velvet color · add a gold hinge or brass clasp · swap slate for black marble or dark wood.
 
----
-
 ## Footwear
 
 ### Sneaker
@@ -201,8 +183,6 @@ blank white sneaker, floating in mid-air, dynamic studio lighting, clean grey ba
 Removing ground contact avoids surface-shadow interpretation issues and lets the model render the sole and side profile at the same time. Multiple studio light sources reduce single-shadow harshness while still defining panel seams and sole texture.
 
 **Variants:** change the colorway · add a visible tread pattern · match the background to your brand's color palette.
-
----
 
 ## Building your own prompt
 
@@ -220,7 +200,9 @@ If text or letters show up on the product, add `--no text` explicitly and regene
 
 If the background feels too busy, trim the environment description down to one or two terms instead of stacking props. If the product gets cropped, check that the aspect ratio matches the subject's natural orientation — a tall bottle needs 4:5, not 16:9. 
 
-If materials look plastic instead of what you intended, add an explicit material term rather than relying on the product name. If texture detail looks flat, switch from even lighting to directional or low-angle lighting, since shadows are what create the appearance of texture in the first place.
+If materials look plastic instead of what you intended, add an explicit material term rather than relying on the product name. 
+
+If texture detail looks flat, switch from even lighting to directional or low-angle lighting, since shadows are what create the appearance of texture in the first place.
 
 ## FAQ
 
@@ -231,3 +213,10 @@ If materials look plastic instead of what you intended, add an explicit material
 **Which aspect ratio should I use?** Match it to the destination platform: 1:1 for Shopify, 4:5 for Etsy/Instagram/Pinterest, 16:9 for banners and wide lifestyle shots.
 
 **How do I stop unwanted text from appearing?** Add `--no text` at the end of the prompt. If it persists, the environment description may be implying a label — simplify it.
+
+## Official Midjourney Resources
+
+- [Midjourney website](https://www.midjourney.com/) — sign up, subscribe, and access the web app
+- [Midjourney documentation](https://docs.midjourney.com/) — parameter reference, model versions, and feature guides
+- [Midjourney Discord](https://discord.gg/midjourney) — the original bot interface and community showcase
+- [Midjourney terms of service](https://docs.midjourney.com/docs/terms-of-service) — current usage rights and commercial licensing terms
