@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://sevenskytech1.github.io/midjourney-mockup-prompts/sitemap.xml
