@@ -206,13 +206,17 @@ If texture detail looks flat, switch from even lighting to directional or low-an
 
 ## FAQ
 
-**Does this work in Midjourney V7?** Yes — these were written for V7 and remain compatible with V6. Minor adjustments may be needed as future versions change how they weight lighting and material keywords.
+**Does this work in Midjourney V7?** 
+Yes — these were written for V7 and remain compatible with V6. Minor adjustments may be needed as future versions change how they weight lighting and material keywords.
 
-**Can I use the generated images commercially?** That depends on your Midjourney subscription plan. Check Midjourney's current terms, since licensing details can change between tiers and over time.
+**Can I use the generated images commercially?** 
+That depends on your Midjourney subscription plan. Check Midjourney's current terms, since licensing details can change between tiers and over time.
 
-**Which aspect ratio should I use?** Match it to the destination platform: 1:1 for Shopify, 4:5 for Etsy/Instagram/Pinterest, 16:9 for banners and wide lifestyle shots.
+**Which aspect ratio should I use?** 
+Match it to the destination platform: 1:1 for Shopify, 4:5 for Etsy/Instagram/Pinterest, 16:9 for banners and wide lifestyle shots.
 
-**How do I stop unwanted text from appearing?** Add `--no text` at the end of the prompt. If it persists, the environment description may be implying a label — simplify it.
+**How do I stop unwanted text from appearing?** 
+Add `--no text` at the end of the prompt. If it persists, the environment description may be implying a label — simplify it.
 
 ## Official Midjourney Resources
 
