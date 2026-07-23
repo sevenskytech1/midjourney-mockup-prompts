@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Class Incharge Assistant - Academic Management System for Teachers">
+    <title>Class Incharge Assistant</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#2563eb">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <span class="nav-icon">📚</span>
+                <span class="nav-title">Class Incharge</span>
+            </div>
+            <div class="nav-menu">
+                <button class="nav-btn active" data-section="dashboard">Dashboard</button>
+                <button class="nav-btn" data-section="students">Students</button>
+                <button class="nav-btn" data-section="attendance">Attendance</button>
+                <button class="nav-btn" data-section="marks">Marks</button>
+                <button class="nav-btn" data-section="homework">Homework</button>
+                <button class="nav-btn" data-section="behavior">Behavior</button>
+                <button class="nav-btn" data-section="reports">Reports</button>
+            </div>
+            <div class="nav-user">
+                <button class="btn-logout" id="logoutBtn">Logout</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Login Screen -->
+    <div id="loginScreen" class="login-screen">
+        <div class="login-container">
+            <div class="login-box">
+                <div class="login-header">
+                    <span class="login-icon">📚</span>
+                    <h1>Class Incharge Assistant</h1>
+                    <p>Academic Management System</p>
+                </div>
+                <form id="loginForm" class="login-form">
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" placeholder="teacher@example.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" placeholder="Enter your password" required>
+                    </div>
+                    <button type="submit" class="btn-primary btn-large">Login</button>
+                    <p class="login-note">Demo: Use any email and password "demo" to login</p>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Application -->
+    <div id="appContainer" class="app-hidden">
+        <!-- Dashboard Section -->
+        <section id="dashboard" class="section active">
+            <div class="section-header">
+                <h1>Dashboard</h1>
+                <div class="search-bar">
+                    <input type="text" id="dashboardSearch" placeholder="Search student...">
+                </div>
+            </div>
+
+            <div class="dashboard-grid">
+                <!-- Stats Cards -->
+                <div class="stats-row">
+                    <div class="stat-card">
+                        <div class="stat-icon">👥</div>
+                        <div class="stat-content">
+                            <div class="stat-label">Total Students</div>
+                            <div class="stat-value" id="totalStudents">0</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">✅</div>
+                        <div class="stat-content">
+                            <div class="stat-label">Avg Attendance</div>
+                            <div class="stat-value" id="avgAttendance">0%</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">📊</div>
+                        <div class="stat-content">
+                            <div class="stat-label">Avg Marks</div>
+                            <div class="stat-value" id="avgMarks">0%</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">⚠️</div>
+                        <div class="stat-content">
+                            <div class="stat-label">Low Attendance</div>
+                            <div class="stat-value" id="lowAttendance">0</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Top Performers -->
+                <div class="dashboard-section">
+                    <h3>Top 5 Performers</h3>
+                    <div id="topPerformers" class="performers-list">
+                        <p class="empty-state">No data yet</p>
+                    </div>
+                </div>
+
+                <!-- Weak Performers -->
+                <div class="dashboard-section">
+                    <h3>Weak Performers (< 40%)</h3>
+                    <div id="weakPerformers" class="performers-list">
+                        <p class="empty-state">No data yet</p>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="dashboard-section">
+                    <h3>Quick Actions</h3>
+                    <div class="quick-actions">
+                        <button class="btn-action" data-action="markAttendance">📋 Mark Attendance</button>
+                        <button class="btn-action" data-action="enterMarks">📝 Enter Marks</button>
+                        <button class="btn-action" data-action="addHomework">📚 Add Homework</button>
+                        <button class="btn-action" data-action="generateReport">📄 Generate Report</button>
+                    </div>
+                </div>
+
+                <!-- Recent Activities -->
+                <div class="dashboard-section">
+                    <h3>Recent Activities</h3>
+                    <div id="recentActivities" class="activities-list">
+                        <p class="empty-state">No activities yet</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Students Section -->
+        <section id="students" class="section">
+            <div class="section-header">
+                <h1>Student Management</h1>
+                <button id="addStudentBtn" class="btn-primary">+ Add Student</button>
+            </div>
+
+            <div class="students-container">
+                <div class="filter-sidebar">
+                    <h3>Filters</h3>
+                    <div class="filter-group">
+                        <label>Search by Name</label>
+                        <input type="text" id="searchStudent" placeholder="Name or Roll Number">
+                    </div>
+                    <div class="filter-group">
+                        <label>Sort By</label>
+                        <select id="sortBy">
+                            <option value="rollNumber">Roll Number</option>
+                            <option value="name">Name</option>
+                            <option value="attendance">Attendance %</option>
+                            <option value="marks">Marks</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Category</label>
+                        <select id="categoryFilter">
+                            <option value="">All</option>
+                            <option value="regular">Regular</option>
+                            <option value="weak">Weak Performer</option>
+                            <option value="high">High Performer</option>
+                        </select>
+                    </div>
+                    <button id="bulkImportBtn" class="btn-secondary">📥 Bulk Import</button>
+                </div>
+
+                <div class="students-list">
+                    <table class="students-table">
+                        <thead>
+                            <tr>
+                                <th>Roll #</th>
+                                <th>Name</th>
+                                <th>Father Name</th>
+                                <th>Attendance</th>
+                                <th>Marks</th>
+                                <th>Phone</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="studentsTableBody">
+                            <tr><td colspan="7" class="empty-state">No students added yet</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Add/Edit Student Modal -->
+            <div id="studentModal" class="modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2>Add/Edit Student</h2>
+                        <button class="modal-close">&times;</button>
+                    </div>
+                    <form id="studentForm" class="form-grid">
+                        <div class="form-group">
+                            <label>Roll Number</label>
+                            <input type="number" id="rollNumber" placeholder="1" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Name</label>
+                            <input type="text" id="studentName" placeholder="Student Name" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Father's Name</label>
+                            <input type="text" id="fatherName" placeholder="Father's Name">
+                        </div>
+                        <div class="form-group">
+                            <label>Mother's Name</label>
+                            <input type="text" id="motherName" placeholder="Mother's Name">
+                        </div>
+                        <div class="form-group">
+                            <label>Father's Phone</label>
+                            <input type="tel" id="fatherPhone" placeholder="+923001234567">
+                        </div>
+                        <div class="form-group">
+                            <label>Father's WhatsApp</label>
+                            <input type="tel" id="fatherWhatsapp" placeholder="+923001234567">
+                        </div>
+                        <div class="form-group">
+                            <label>Date of Birth</label>
+                            <input type="date" id="dob">
+                        </div>
+                        <div class="form-group">
+                            <label>Gender</label>
+                            <select id="gender">
+                                <option value="">Select Gender</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                            </select>
+                        </div>
+                        <div class="form-group full-width">
+                            <label>Address</label>
+                            <textarea id="address" placeholder="Home Address"></textarea>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn-primary">Save Student</button>
+                            <button type="button" class="btn-secondary modal-close-btn">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Student Detail Modal -->
+            <div id="studentDetailModal" class="modal">
+                <div class="modal-content large">
+                    <div class="modal-header">
+                        <h2>Student Profile</h2>
+                        <button class="modal-close">&times;</button>
+                    </div>
+                    <div id="studentDetailContent" class="student-detail-content">
+                        <!-- Content will be populated dynamically -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Attendance Section -->
+        <section id="attendance" class="section">
+            <div class="section-header">
+                <h1>Attendance Management</h1>
+                <input type="date" id="attendanceDate" class="date-input">
+            </div>
+
+            <div class="attendance-container">
+                <div class="attendance-controls">
+                    <button id="markAllPresent" class="btn-success">✅ Mark All Present</button>
+                    <button id="markAllAbsent" class="btn-danger">❌ Mark All Absent</button>
+                    <button id="saveAttendance" class="btn-primary">💾 Save Attendance</button>
+                    <button id="viewAttendanceReport" class="btn-secondary">📊 View Report</button>
+                </div>
+
+                <div class="attendance-grid" id="attendanceGrid">
+                    <p class="empty-state">No students added yet. Go to Students section to add students.</p>
+                </div>
+            </div>
+
+            <!-- Attendance Report Modal -->
+            <div id="attendanceReportModal" class="modal">
+                <div class="modal-content large">
+                    <div class="modal-header">
+                        <h2>Attendance Report</h2>
+                        <button class="modal-close">&times;</button>
+                    </div>
+                    <div class="report-controls">
+                        <select id="reportType">
+                            <option value="daily">Daily Report</option>
+                            <option value="monthly">Monthly Report</option>
+                            <option value="quarterly">Quarterly Report</option>
+                        </select>
+                        <button id="exportAttendanceReport" class="btn-primary">📥 Export to Excel</button>
+                        <button id="printAttendanceReport" class="btn-secondary">🖨️ Print</button>
+                    </div>
+                    <div id="attendanceReportContent" class="report-content">
+                        <!-- Content will be populated dynamically -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Marks Section -->
+        <section id="marks" class="section">
+            <div class="section-header">
+                <h1>Marks Management</h1>
+                <button id="addTestBtn" class="btn-primary">+ Add Test</button>
+            </div>
+
+            <div class="marks-container">
+                <div class="tests-list">
+                    <h3>Tests</h3>
+                    <div id="testsList" class="tests-grid">
+                        <p class="empty-state">No tests created yet</p>
+                    </div>
+                </div>
+
+                <div class="marks-entry">
+                    <h3 id="marksTitle">Select a test to enter marks</h3>
+                    <div id="marksGrid" class="marks-table-container">
+                        <p class="empty-state">No test selected</p>
+                    </div>
+                    <button id="saveMarks" class="btn-primary" style="display: none;">💾 Save Marks</button>
+                </div>
+            </div>
+
+            <!-- Add Test Modal -->
+            <div id="testModal" class="modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2>Create New Test</h2>
+                        <button class="modal-close">&times;</button>
+                    </div>
+                    <form id="testForm" class="form-grid">
+                        <div class="form-group">
+                            <label>Test Name</label>
+                            <input type="text" id="testName" placeholder="Monthly Test" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Test Type</label>
+                            <select id="testType" required>
+                                <option value="">Select Type</option>
+                                <option value="weekly">Weekly Test</option>
+                                <option value="monthly">Monthly Test</option>
+                                <option value="unit">Unit Test</option>
+                                <option value="quarterly">Quarterly Test</option>
+                                <option value="midterm">Mid-Term Exam</option>
+                                <option value="final">Final Exam</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Date</label>
+                            <input type="date" id="testDate" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Total Marks</label>
+                            <input type="number" id="totalMarks" placeholder="100" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Subject</label>
+                            <select id="subject" required>
+                                <option value="">Select Subject</option>
+                                <option value="math">Mathematics</option>
+                                <option value="english">English</option>
+                                <option value="science">Science</option>
+                                <option value="urdu">Urdu</option>
+                                <option value="islamicstudies">Islamic Studies</option>
+                                <option value="socialstudies">Social Studies</option>
+                            </select>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn-primary">Create Test</button>
+                            <button type="button" class="btn-secondary modal-close-btn">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Homework Section -->
+        <section id="homework" class="section">
+            <div class="section-header">
+                <h1>Homework Management</h1>
+                <button id="addHomeworkBtn" class="btn-primary">+ Assign Homework</button>
+            </div>
+
+            <div class="homework-container">
+                <div class="homework-list">
+                    <h3>Assigned Homework</h3>
+                    <div id="homeworkList" class="homework-items">
+                        <p class="empty-state">No homework assigned yet</p>
+                    </div>
+                </div>
+
+                <div class="homework-check">
+                    <h3 id="checkTitle">Select homework to check copies</h3>
+                    <div id="checkGrid" class="homework-check-grid">
+                        <p class="empty-state">No homework selected</p>
+                    </div>
+                    <button id="saveHomeworkMarks" class="btn-primary" style="display: none;">💾 Save Marks</button>
+                </div>
+            </div>
+
+            <!-- Add Homework Modal -->
+            <div id="homeworkModal" class="modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2>Assign Homework</h2>
+                        <button class="modal-close">&times;</button>
+                    </div>
+                    <form id="homeworkForm" class="form-grid">
+                        <div class="form-group">
+                            <label>Homework Title</label>
+                            <input type="text" id="hwTitle" placeholder="Chapter 5 Exercises" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Subject</label>
+                            <select id="hwSubject" required>
+                                <option value="">Select Subject</option>
+                                <option value="math">Mathematics</option>
+                                <option value="english">English</option>
+                                <option value="science">Science</option>
+                                <option value="urdu">Urdu</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Date Assigned</label>
+                            <input type="date" id="hwDateAssigned" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Due Date</label>
+                            <input type="date" id="hwDueDate" required>
+                        </div>
+                        <div class="form-group full-width">
+                            <label>Description</label>
+                            <textarea id="hwDescription" placeholder="Homework details..." required></textarea>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn-primary">Assign Homework</button>
+                            <button type="button" class="btn-secondary modal-close-btn">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Behavior Section -->
+        <section id="behavior" class="section">
+            <div class="section-header">
+                <h1>Behavior & Discipline Tracking</h1>
+                <button id="addIncidentBtn" class="btn-primary">+ Log Incident</button>
+            </div>
+
+            <div class="behavior-container">
+                <div class="filter-sidebar">
+                    <h3>Filters</h3>
+                    <div class="filter-group">
+                        <label>Student</label>
+                        <select id="behaviorStudentFilter">
+                            <option value="">All Students</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Incident Type</label>
+                        <select id="incidentTypeFilter">
+                            <option value="">All Types</option>
+                            <option value="disruption">Classroom Disruption</option>
+                            <option value="bullying">Bullying</option>
+                            <option value="homework">Incomplete Homework</option>
+                            <option value="attendance">Late Arrival</option>
+                            <option value="uniform">Uniform Violation</option>
+                            <option value="disrespect">Disrespect</option>
+                            <option value="positive">Positive Behavior</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="behavior-records">
+                    <div id="behaviorList" class="behavior-items">
+                        <p class="empty-state">No behavior records yet</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Add Incident Modal -->
+            <div id="incidentModal" class="modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2>Log Behavior Incident</h2>
+                        <button class="modal-close">&times;</button>
+                    </div>
+                    <form id="incidentForm" class="form-grid">
+                        <div class="form-group">
+                            <label>Student</label>
+                            <select id="incidentStudent" required>
+                                <option value="">Select Student</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Incident Type</label>
+                            <select id="incidentType" required>
+                                <option value="">Select Type</option>
+                                <option value="disruption">Classroom Disruption</option>
+                                <option value="bullying">Bullying</option>
+                                <option value="homework">Incomplete Homework</option>
+                                <option value="attendance">Late Arrival</option>
+                                <option value="uniform">Uniform Violation</option>
+                                <option value="disrespect">Disrespect to Teacher</option>
+                                <option value="positive">Positive Behavior</option>
+                                <option value="achievement">Achievement</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Severity</label>
+                            <select id="severity">
+                                <option value="minor">Minor</option>
+                                <option value="moderate">Moderate</option>
+                                <option value="severe">Severe</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Date</label>
+                            <input type="date" id="incidentDate" required>
+                        </div>
+                        <div class="form-group full-width">
+                            <label>Description</label>
+                            <textarea id="incidentDescription" placeholder="Incident details..." required></textarea>
+                        </div>
+                        <div class="form-group full-width">
+                            <label>Action Taken</label>
+                            <textarea id="actionTaken" placeholder="What action was taken?"></textarea>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn-primary">Log Incident</button>
+                            <button type="button" class="btn-secondary modal-close-btn">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Reports Section -->
+        <section id="reports" class="section">
+            <div class="section-header">
+                <h1>Reports & Analytics</h1>
+            </div>
+
+            <div class="reports-container">
+                <div class="report-options">
+                    <h3>Generate Reports</h3>
+                    <div class="report-buttons">
+                        <button class="btn-report" data-report="academic">📊 Academic Report</button>
+                        <button class="btn-report" data-report="attendance">✅ Attendance Report</button>
+                        <button class="btn-report" data-report="performance">📈 Performance Report</button>
+                        <button class="btn-report" data-report="behavior">🎯 Behavior Report</button>
+                        <button class="btn-report" data-report="fees">💰 Fee Status Report</button>
+                        <button class="btn-report" data-report="syllabus">📚 Syllabus Progress</button>
+                    </div>
+                </div>
+
+                <div class="report-preview">
+                    <h3>Report Preview</h3>
+                    <div class="report-controls">
+                        <select id="reportFormat">
+                            <option value="screen">View on Screen</option>
+                            <option value="pdf">Download PDF</option>
+                            <option value="excel">Download Excel</option>
+                        </select>
+                        <button id="generateReportBtn" class="btn-primary">Generate</button>
+                        <button id="printReportBtn" class="btn-secondary">🖨️ Print</button>
+                    </div>
+                    <div id="reportOutput" class="report-output">
+                        <p class="empty-state">Select a report type to preview</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
